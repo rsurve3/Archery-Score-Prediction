@@ -1,0 +1,369 @@
+﻿Local Here(
+	(table1 = New Table( "Custom Design 2",
+		Add Rows( 32 ),
+		New Table Variable( "Design", "Custom Design" ),
+		New Table Variable( "Criterion", "D Optimal" ),
+		New Script(
+			"Model",
+			Fit Model(
+				Effects(
+					:Random Block & Random, :Arrow Length, :Target Face Size,
+					:Distance to Target, :Arrow Diameter, :Wobble, :Wind Speed,
+					:Type of Bow, :Type of Arrow
+				),
+				Y( :Score )
+			)
+		),
+		New Script(
+			"Evaluate Design",
+			DOE(
+				Evaluate Design,
+				X(
+					:Random Block, :Arrow Length, :Target Face Size,
+					:Distance to Target, :Arrow Diameter, :Wobble, :Wind Speed,
+					:Type of Bow, :Type of Arrow
+				)
+			)
+		),
+		New Script(
+			"DOE Dialog",
+			DOE(
+				Custom Design,
+				{Add Response( Maximize, "Score", ., ., . ),
+				Add Factor(
+					Categorical,
+					{"Standard (31 inches)", "Short (27 inches)"},
+					"Arrow Length",
+					0
+				), Add Factor(
+					Categorical,
+					{"Recurve (122 cm)", "Compound (80 cm)"},
+					"Target Face Size",
+					0
+				), Add Factor(
+					Categorical,
+					{"Low (<40 yards)", "High (>60 yards)"},
+					"Distance to Target",
+					0
+				), Add Factor(
+					Categorical,
+					{"Standard (6.5mm)", "Ultra- Micro (4mm)"},
+					"Arrow Diameter",
+					0
+				), Add Factor(
+					Categorical,
+					{"Low (<5mm)", "High (>5mm)"},
+					"Wobble",
+					0
+				), Add Factor(
+					Categorical,
+					{"Low (<2mph)", "High (>5mph)"},
+					"Wind Speed",
+					0
+				), Add Factor(
+					Categorical,
+					{"Long Bow", "Cross Bow"},
+					"Type of Bow",
+					0
+				), Add Factor(
+					Categorical,
+					{"Aluminium Arrow", "Carbon Arrow"},
+					"Type of Arrow",
+					0
+				), Set Random Seed( 1976810620 ), Number of Starts( 1249 ),
+				Add Term( {1, 0} ), Add Term( {1, 1} ), Add Term( {2, 1} ),
+				Add Term( {3, 1} ), Add Term( {4, 1} ), Add Term( {5, 1} ),
+				Add Term( {6, 1} ), Add Term( {7, 1} ), Add Term( {8, 1} ),
+				Add Alias Term( {1, 1}, {2, 1} ), Add Alias Term( {1, 1}, {3, 1} ),
+				Add Alias Term( {1, 1}, {4, 1} ), Add Alias Term( {1, 1}, {5, 1} ),
+				Add Alias Term( {1, 1}, {6, 1} ), Add Alias Term( {1, 1}, {7, 1} ),
+				Add Alias Term( {1, 1}, {8, 1} ), Add Alias Term( {2, 1}, {3, 1} ),
+				Add Alias Term( {2, 1}, {4, 1} ), Add Alias Term( {2, 1}, {5, 1} ),
+				Add Alias Term( {2, 1}, {6, 1} ), Add Alias Term( {2, 1}, {7, 1} ),
+				Add Alias Term( {2, 1}, {8, 1} ), Add Alias Term( {3, 1}, {4, 1} ),
+				Add Alias Term( {3, 1}, {5, 1} ), Add Alias Term( {3, 1}, {6, 1} ),
+				Add Alias Term( {3, 1}, {7, 1} ), Add Alias Term( {3, 1}, {8, 1} ),
+				Add Alias Term( {4, 1}, {5, 1} ), Add Alias Term( {4, 1}, {6, 1} ),
+				Add Alias Term( {4, 1}, {7, 1} ), Add Alias Term( {4, 1}, {8, 1} ),
+				Add Alias Term( {5, 1}, {6, 1} ), Add Alias Term( {5, 1}, {7, 1} ),
+				Add Alias Term( {5, 1}, {8, 1} ), Add Alias Term( {6, 1}, {7, 1} ),
+				Add Alias Term( {6, 1}, {8, 1} ), Add Alias Term( {7, 1}, {8, 1} ),
+				Replicates( 2 ), Set Runs Per Random Block( 8 ),
+				Set Sample Size( 32 ), Simulate Responses( 0 ), Save X Matrix( 0 ),
+				Make Design}
+			)
+		),
+		New Column( "Random Block",
+			Character( 1 ),
+			"Nominal",
+			Set Property( "Design Role", DesignRole( Random Block ) ),
+			Set Property( "Value Order", {Custom Order( {"1", "2", "3", "4"} )} ),
+			Set Values(
+				{"1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1",
+				"1", "1", "1", "2", "2", "2", "2", "2", "2", "2", "2", "2", "2", "2",
+				"2", "2", "2", "2", "2"}
+			),
+			Set Display Width( 81 )
+		),
+		New Column( "Arrow Length",
+			Character,
+			"Nominal",
+			Set Property(
+				"Value Order",
+				{Custom Order( {"Standard (31 inches)", "Short (27 inches)"} )}
+			),
+			Set Property( "Design Role", DesignRole( Categorical ) ),
+			Set Property( "Factor Changes", Easy ),
+			Set Values(
+				{"Short (27 inches)", "Short (27 inches)", "Standard (31 inches)",
+				"Standard (31 inches)", "Standard (31 inches)",
+				"Standard (31 inches)", "Standard (31 inches)",
+				"Standard (31 inches)", "Short (27 inches)", "Standard (31 inches)",
+				"Short (27 inches)", "Short (27 inches)", "Short (27 inches)",
+				"Short (27 inches)", "Standard (31 inches)", "Standard (31 inches)",
+				"Short (27 inches)", "Standard (31 inches)", "Short (27 inches)",
+				"Short (27 inches)", "Standard (31 inches)", "Short (27 inches)",
+				"Standard (31 inches)", "Standard (31 inches)",
+				"Standard (31 inches)", "Short (27 inches)", "Short (27 inches)",
+				"Short (27 inches)", "Standard (31 inches)", "Short (27 inches)",
+				"Standard (31 inches)", "Short (27 inches)"}
+			),
+			Set Display Width( 139 )
+		),
+		New Column( "Target Face Size",
+			Character,
+			"Nominal",
+			Set Property(
+				"Value Order",
+				{Custom Order( {"Recurve (122 cm)", "Compound (80 cm)"} )}
+			),
+			Set Property( "Design Role", DesignRole( Categorical ) ),
+			Set Property( "Factor Changes", Easy ),
+			Set Values(
+				{"Recurve (122 cm)", "Recurve (122 cm)", "Recurve (122 cm)",
+				"Compound (80 cm)", "Recurve (122 cm)", "Recurve (122 cm)",
+				"Compound (80 cm)", "Compound (80 cm)", "Recurve (122 cm)",
+				"Compound (80 cm)", "Recurve (122 cm)", "Compound (80 cm)",
+				"Compound (80 cm)", "Compound (80 cm)", "Recurve (122 cm)",
+				"Recurve (122 cm)", "Recurve (122 cm)", "Recurve (122 cm)",
+				"Compound (80 cm)", "Recurve (122 cm)", "Compound (80 cm)",
+				"Recurve (122 cm)", "Compound (80 cm)", "Compound (80 cm)",
+				"Recurve (122 cm)", "Compound (80 cm)", "Compound (80 cm)",
+				"Recurve (122 cm)", "Recurve (122 cm)", "Compound (80 cm)",
+				"Recurve (122 cm)", "Recurve (122 cm)"}
+			),
+			Set Display Width( 130 )
+		),
+		New Column( "Distance to Target",
+			Character,
+			"Nominal",
+			Set Property(
+				"Value Order",
+				{Custom Order( {"Low (<40 yards)", "High (>60 yards)"} )}
+			),
+			Set Property( "Design Role", DesignRole( Categorical ) ),
+			Set Property( "Factor Changes", Easy ),
+			Set Values(
+				{"High (>60 yards)", "High (>60 yards)", "Low (<40 yards)",
+				"High (>60 yards)", "High (>60 yards)", "Low (<40 yards)",
+				"Low (<40 yards)", "High (>60 yards)", "Low (<40 yards)",
+				"Low (<40 yards)", "Low (<40 yards)", "High (>60 yards)",
+				"High (>60 yards)", "Low (<40 yards)", "Low (<40 yards)",
+				"High (>60 yards)", "Low (<40 yards)", "Low (<40 yards)",
+				"Low (<40 yards)", "Low (<40 yards)", "High (>60 yards)",
+				"High (>60 yards)", "High (>60 yards)", "High (>60 yards)",
+				"Low (<40 yards)", "Low (<40 yards)", "High (>60 yards)",
+				"High (>60 yards)", "Low (<40 yards)", "Low (<40 yards)",
+				"High (>60 yards)", "High (>60 yards)"}
+			),
+			Set Display Width( 117 )
+		),
+		New Column( "Arrow Diameter",
+			Character,
+			"Nominal",
+			Set Property(
+				"Value Order",
+				{Custom Order( {"Standard (6.5mm)", "Ultra- Micro (4mm)"} )}
+			),
+			Set Property( "Design Role", DesignRole( Categorical ) ),
+			Set Property( "Factor Changes", Easy ),
+			Set Values(
+				{"Standard (6.5mm)", "Ultra- Micro (4mm)", "Standard (6.5mm)",
+				"Standard (6.5mm)", "Ultra- Micro (4mm)", "Ultra- Micro (4mm)",
+				"Ultra- Micro (4mm)", "Standard (6.5mm)", "Standard (6.5mm)",
+				"Standard (6.5mm)", "Standard (6.5mm)", "Ultra- Micro (4mm)",
+				"Ultra- Micro (4mm)", "Ultra- Micro (4mm)", "Standard (6.5mm)",
+				"Ultra- Micro (4mm)", "Ultra- Micro (4mm)", "Ultra- Micro (4mm)",
+				"Standard (6.5mm)", "Ultra- Micro (4mm)", "Standard (6.5mm)",
+				"Standard (6.5mm)", "Ultra- Micro (4mm)", "Ultra- Micro (4mm)",
+				"Ultra- Micro (4mm)", "Standard (6.5mm)", "Standard (6.5mm)",
+				"Standard (6.5mm)", "Standard (6.5mm)", "Ultra- Micro (4mm)",
+				"Standard (6.5mm)", "Ultra- Micro (4mm)"}
+			),
+			Set Display Width( 131 )
+		),
+		New Column( "Wobble",
+			Character,
+			"Nominal",
+			Set Property(
+				"Value Order",
+				{Custom Order( {"Low (<5mm)", "High (>5mm)"} )}
+			),
+			Set Property( "Design Role", DesignRole( Categorical ) ),
+			Set Property( "Factor Changes", Easy ),
+			Set Values(
+				{"High (>5mm)", "High (>5mm)", "Low (<5mm)", "High (>5mm)",
+				"Low (<5mm)", "High (>5mm)", "Low (<5mm)", "Low (<5mm)",
+				"Low (<5mm)", "High (>5mm)", "Low (<5mm)", "High (>5mm)",
+				"High (>5mm)", "High (>5mm)", "High (>5mm)", "Low (<5mm)",
+				"High (>5mm)", "High (>5mm)", "Low (<5mm)", "Low (<5mm)",
+				"High (>5mm)", "Low (<5mm)", "Low (<5mm)", "Low (<5mm)",
+				"Low (<5mm)", "Low (<5mm)", "High (>5mm)", "Low (<5mm)",
+				"High (>5mm)", "High (>5mm)", "High (>5mm)", "Low (<5mm)"}
+			),
+			Set Display Width( 93 )
+		),
+		New Column( "Wind Speed",
+			Character,
+			"Nominal",
+			Set Property(
+				"Value Order",
+				{Custom Order( {"Low (<2mph)", "High (>5mph)"} )}
+			),
+			Set Property( "Design Role", DesignRole( Categorical ) ),
+			Set Property( "Factor Changes", Easy ),
+			Set Values(
+				{"Low (<2mph)", "High (>5mph)", "High (>5mph)", "Low (<2mph)",
+				"Low (<2mph)", "Low (<2mph)", "Low (<2mph)", "High (>5mph)",
+				"Low (<2mph)", "High (>5mph)", "Low (<2mph)", "High (>5mph)",
+				"High (>5mph)", "Low (<2mph)", "Low (<2mph)", "High (>5mph)",
+				"High (>5mph)", "High (>5mph)", "High (>5mph)", "High (>5mph)",
+				"High (>5mph)", "Low (<2mph)", "Low (<2mph)", "Low (<2mph)",
+				"High (>5mph)", "High (>5mph)", "Low (<2mph)", "High (>5mph)",
+				"Low (<2mph)", "High (>5mph)", "High (>5mph)", "High (>5mph)"}
+			),
+			Set Display Width( 120 )
+		),
+		New Column( "Type of Bow",
+			Character,
+			"Nominal",
+			Set Property(
+				"Value Order",
+				{Custom Order( {"Long Bow", "Cross Bow"} )}
+			),
+			Set Property( "Design Role", DesignRole( Categorical ) ),
+			Set Property( "Factor Changes", Easy ),
+			Set Values(
+				{"Cross Bow", "Long Bow", "Cross Bow", "Long Bow", "Long Bow",
+				"Cross Bow", "Long Bow", "Cross Bow", "Long Bow", "Cross Bow",
+				"Long Bow", "Long Bow", "Long Bow", "Cross Bow", "Cross Bow",
+				"Cross Bow", "Cross Bow", "Long Bow", "Long Bow", "Long Bow",
+				"Cross Bow", "Long Bow", "Cross Bow", "Cross Bow", "Long Bow",
+				"Cross Bow", "Long Bow", "Cross Bow", "Long Bow", "Cross Bow",
+				"Long Bow", "Cross Bow"}
+			),
+			Set Display Width( 89 )
+		),
+		New Column( "Type of Arrow",
+			Character,
+			"Nominal",
+			Set Property(
+				"Value Order",
+				{Custom Order( {"Aluminium Arrow", "Carbon Arrow"} )}
+			),
+			Set Property( "Design Role", DesignRole( Categorical ) ),
+			Set Property( "Factor Changes", Easy ),
+			Set Values(
+				{"Aluminium Arrow", "Aluminium Arrow", "Carbon Arrow",
+				"Carbon Arrow", "Carbon Arrow", "Aluminium Arrow", "Aluminium Arrow",
+				"Carbon Arrow", "Aluminium Arrow", "Aluminium Arrow",
+				"Aluminium Arrow", "Carbon Arrow", "Carbon Arrow", "Aluminium Arrow",
+				"Carbon Arrow", "Aluminium Arrow", "Carbon Arrow", "Carbon Arrow",
+				"Carbon Arrow", "Aluminium Arrow", "Aluminium Arrow", "Carbon Arrow",
+				"Aluminium Arrow", "Carbon Arrow", "Aluminium Arrow", "Carbon Arrow",
+				"Aluminium Arrow", "Aluminium Arrow", "Carbon Arrow", "Carbon Arrow",
+				"Aluminium Arrow", "Carbon Arrow"}
+			),
+			Set Display Width( 126 )
+		),
+		New Column( "Score",
+			Numeric,
+			"Continuous",
+			Format( "Best", 12 ),
+			Set Property(
+				"Response Limits",
+				{Goal( Maximize ), Lower( . ), Upper( . ), Importance( . )}
+			),
+			Set Values(
+				[6, 8, 6, 4, 4, 0, 6, 8, 6, 10, 7, 5, 7, 6, 5, 9, 1, 7, 10, 9, 8, 8,
+				7, 8, 7, 9, 5, 6, 2, 8, 6, 8]
+			),
+			Set Display Width( 77 )
+		)
+	)) << Run Formulas;
+	New Window( "Custom Design - Fit Least Squares - Final",
+		table1 << Fit Model(
+			Y( :Score ),
+			Effects(
+				:Arrow Length, :Target Face Size, :Distance to Target,
+				:Arrow Diameter, :Wobble, :Wind Speed, :Type of Bow, :Type of Arrow
+			),
+			Personality( "Standard Least Squares" ),
+			Emphasis( "Effect Screening" ),
+			Run(
+				Profiler(
+					1,
+					Confidence Intervals( 1 ),
+					Desirability Functions( 1 ),
+					Arrange in Rows( 5 ),
+					Term Value(
+						Arrow Length( "Standard (31 inches)", Lock( 0 ), Show( 1 ) ),
+						Target Face Size( "Recurve (122 cm)", Lock( 0 ), Show( 1 ) ),
+						Distance to Target(
+							"Low (<40 yards)",
+							Lock( 0 ),
+							Show( 1 )
+						),
+						Arrow Diameter( "Standard (6.5mm)", Lock( 0 ), Show( 1 ) ),
+						Wobble( "Low (<5mm)", Lock( 0 ), Show( 1 ) ),
+						Wind Speed( "Low (<2mph)", Lock( 0 ), Show( 1 ) ),
+						Type of Bow( "Long Bow", Lock( 0 ), Show( 1 ) ),
+						Type of Arrow( "Aluminium Arrow", Lock( 0 ), Show( 1 ) )
+					)
+				),
+				:Score << {Summary of Fit( 1 ), Analysis of Variance( 1 ),
+				Parameter Estimates( 1 ), Normal Plot( 1, Half Normal Plot( 1 ) ),
+				Sorted Estimates( 0 ), Plot Actual by Predicted( 1 ),
+				Plot Regression( 0 ), Plot Residual by Predicted( 1 ),
+				Plot Studentized Residuals( 1 ), Plot Effect Leverage( 0 ),
+				Plot Residual by Normal Quantiles( 0 ),
+				Box Cox Y Transformation( 0 )}
+			),
+			SendToReport(
+				Dispatch(
+					{"Response Score"},
+					"Parameter Estimates",
+					OutlineBox,
+					{Close( 0 )}
+				),
+				Dispatch(
+					{"Response Score", "Effect Screening", "Normal Plot"},
+					"FitLS NormalEffectPlot",
+					FrameBox,
+					Add Pin Annotation(
+						Seg( Marker Seg( 1 ) ),
+						Index( 6 ),
+						Index Row( 6 ),
+						UniqueID( 6 ),
+						FoundPt( {214, 842} ),
+						Origin( {1.186125, 3.02296804757701} ),
+						Offset( {-140, 18} ),
+						RightOfCenter( 0 ),
+						Tag Line( 1 )
+					)
+				)
+			)
+		)
+	) << Move Window( 770, 22 ) << Size Window( 2063, 1255 ) << Maximize Display <<
+	Set Window Icon( "Model" );
+)
