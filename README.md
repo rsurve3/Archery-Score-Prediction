@@ -62,30 +62,36 @@ As we have a total of 8 factors, total runs would be 28 = 256 for conducting a f
 
 Number of blocks = 2 so block size is 16.
 
- 
+![image](https://user-images.githubusercontent.com/122759737/214105961-59894f6c-7c52-4167-b52c-2ee3e5eaca39.png)
 
 Design Table:
 
 Below is a snapshot of our Design Table. We took randomized order of all 32 runs. We took 2 replications, and our response variable is the average of those two replications.
 
  
+![image](https://user-images.githubusercontent.com/122759737/214105993-cbdeec89-74b0-49c3-8fb3-f5e3d92d768a.png)
 
 
 Analysis of Data:
 Verification of Normality:
 To check the normality of our data (response variable), we chose the Shapiro-wilk Test. 
  
+![image](https://user-images.githubusercontent.com/122759737/214106020-a55a859f-7ee0-45d1-9d08-f7fa2603a5db.png)
+
 
 The Half Normal Plot Analysis:
 From the Half Normal Plot, we see that factors “Target Face Size”, “Wind Speed” and “Wobble” are away from straight line when compared with all factors. This means that they are not normally distributed with a mean of zero and constant variance. This concludes that they are significant. 
 The remaining five factors are near to line so we can say that they are normally distributed with a mean of zero and a constant variance which means do not have a significant effect.
  
+![image](https://user-images.githubusercontent.com/122759737/214106055-7985fabe-8895-4003-a180-3f775f5b9fb2.png)
+
 
 Model Summary:
 
 After Half-Normal Plot Analysis, we worked on Model Summary for further insights on factors. We found out that three factors are significant in our experiment. They are Target Face Size, Wobble and Wind Speed. For the remaining 5 factors, the p-value is not significant.
 
  
+![image](https://user-images.githubusercontent.com/122759737/214106090-a9459d33-5d5b-4f55-bcac-2edd0527ab1e.png)
 
 
 
@@ -99,13 +105,12 @@ Score = 6.408 – 0.853 Target Face Size (Recurve) + 1.044 Wobble (Low) –1.088
 
 Analysis of Variance:
 
- 
- 
+ ![image](https://user-images.githubusercontent.com/122759737/214106144-6d4dc446-1137-4118-bd86-39c79dc91288.png)
+
 
 Parameter Estimates:
 
- 
-
+![image](https://user-images.githubusercontent.com/122759737/214106181-a9ff4763-e3f0-40cd-bd40-a5799f887725.png)
 
 
 Conclusions and Recommendations:
